@@ -1,0 +1,63 @@
+body {background:#FFFFFF; color:#000000; font-family: Helvetica, Geneva, sans-serif; font-size:11pt; margin:0; padding:15px 0 0;}
+#pagebox {
+	background:#FFFFFF;
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	padding:1em;
+	align:center;
+}
+#rightfloat {
+	background:#FFFFFF;
+	float:right;
+	margin-top:2em;
+	margin-right:2em;
+	margin-left:3em;
+	padding:0em;
+}
+#content {
+	background:#FFFFFF;
+	margin-top:1em;
+	margin-left:1em;
+	margin-right:1em;
+	margin-bottom:1em;
+	padding-left:1em;
+	padding-top:1em;
+	padding-right:1em;
+}
+#localbox {background:#F0F0F0; margin:15px; padding:15px}
+#indentbox {margin-left:0px;}
+#bibentry {margin-left:35px; font-family: Helvetica, Geneva, sans-serif; font-size:10pt}
+
+a {text-decoration:none; color:#000098;}
+a img {border:0;}
+b {
+	font-family: helvetica, arial, sans-serif;
+	font-weight:bold;
+	font-size:12pt
+}
+mark1 {
+	font-family: helvetica, arial, sans-serif;
+	font-weight:bold;
+	font-size:24pt
+}
+mark2 {
+	font-family: helvetica, arial, sans-serif;
+	font-weight:bold;
+	font-size:18pt
+}
+mark3 {
+	font-family: helvetica, arial, sans-serif;
+	font-weight:bold;
+	font-size:14pt
+}
+mark4 {
+	font-family: helvetica, arial, sans-serif;
+	font-size:14pt;
+	line-height:1.3em
+}
+mark5 {
+	font-family: helvetica, arial, sans-serif;
+	font-size:14pt;
+	line-height:1.3em
+}
