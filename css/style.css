@@ -148,7 +148,7 @@
 		.image
 		{
 			display: inline-block;
-			border: solid 6px #ebebeb !important;
+			/*border: solid 6px #ebebeb !important;*/
 			-moz-transition: opacity 0.25s ease-in-out;
 			-webkit-transition: opacity 0.25s ease-in-out;
 			-o-transition: opacity 0.25s ease-in-out;
@@ -159,6 +159,11 @@
 			a.image:hover
 			{
 				opacity: 0.9;
+			}
+
+			a.image
+			{
+				border-bottom: solid 0px #ddd;
 			}
 		
 			.image img
