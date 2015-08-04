@@ -91,11 +91,68 @@
                                                 I've made the equivalent video for the same network but trained on the <a href='http://places.csail.mit.edu/downloadCNN.html'>Places Database</a> instead of <a href='http://www.image-net.org/'>ImageNet</a>.
                                                 I also went down the layers and reversed the video to get a zoom out effect.
                                                 My <a>code</a> is online.
-                                                Let me know if you use it to do anything cool.
-                                            <p>
-                                            </p>
                                                 P.S. Sorry for only 480p quality. I was running this on my laptop which 'only' has a GeForce 840M GPU.
                                             </p>
+                                            <p>
+                                                I also had some fun with exploring the differences between the ImageNet and Places trained networks when applied to static images.
+                                                I found <a href='http://mlg.eng.cam.ac.uk/rowan/'>Rowan McAllister's</a> face to be particular amenable to this exploration.
+                                                Below is Rowan and his ImageNet deep dream counterparts as we ascend the layers of the network.
+                                                As many have already noted, we start with enhancing geometric features, and then everything turns into dogs and eyes.
+                                            </p>
+                                            <div class="row">
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_003_conv2_3x3_reduce.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_024_inception_3b_3x3_reduce.jpg" alt=""></span>
+		                                        </section>
+                                            <div class="row">
+		                                    </div>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_026_inception_3b_5x5_reduce.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_030_inception_3b_output.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_055_inception_4b_output.jpg" alt=""></span>
+		                                        </section>
+		                                    </div>
+                                            <p>
+                                                Let's contrast this with Places deep dreaming below.
+                                                Again we start with geometric features, but at higher levels different geometries are enhanced.
+                                                In particular, this network likes spirals and concertric circles.
+                                                And eventually, everything turns into buildings!
+                                            </p>
+                                            <div class="row">
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_places_003_conv2_3x3_reduce.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_places_013_inception_3a_3x3.jpg" alt=""></span>
+		                                        </section>
+                                            <div class="row">
+		                                    </div>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_places_024_inception_3b_3x3_reduce.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_places_031_pool3_3x3_s2.jpg" alt=""></span>
+		                                        </section>
+		                                        <section class="4u">
+		                                            <span class="image image-full"><img src="images/deep-dream/rowan_places_053_inception_4b_pool.jpg" alt=""></span>
+		                                        </section>
+		                                    </div>
+		                                    <p>
+		                                        That's all for now.
+		                                        Check out my <a>code</a> and <a href="contact.html">let me know</a> if you do anything cool.
+		                                    </p>
                                             </br>
 										</article>
 								</div>
