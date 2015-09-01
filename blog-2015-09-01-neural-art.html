@@ -108,7 +108,7 @@
                                                 Let's see how...
                                             </p>
                                             <p>
-                                                On the 26th August, researchers Leon Gatys, Alexander Ecker and Matthias Bethge posted <a href="http://arxiv.org/pdf/1508.06576.pdf">A Neural Algorithm of Artistic Style</a> on arXiv.
+                                                On the 26th August 2015, researchers Leon Gatys, Alexander Ecker and Matthias Bethge posted <a href="http://arxiv.org/pdf/1508.06576.pdf">A Neural Algorithm of Artistic Style</a> on arXiv.
                                                 They described an algorithm which allowed them to combine the style of one image with the content of another.
                                                 For example, we could combine the style of van Gogh's Starry Night with a photograph of the Eiffel tower to get...
                                             </p>
@@ -163,6 +163,7 @@
                                             </div>
                                             <p>
                                                 Notice that all of these images have a similar range of colours and the brush strokes tend to be in the same direction.
+                                                After a bit of experience with this algorithm, it tends to preserve colour if it can, but otherwise uses a nearby replacement in the image who's style it is recreating.
                                             </p>
                                             <p>
                                                 Let's try something very different, how about a Matisse?
@@ -191,6 +192,7 @@
                                                 Again all of the images use a similar colour palette, but it's not quite the same as the original image.
                                                 However, the algorithm has captured the idea of block colours.
                                                 Notice the algorithm has introduced a few artefacts; in particular the colorised border and grid pattern (which somewhat makes it look like the images are rendered on canvas which isn't so bad).
+                                                My feeling at the moment is that many of the artefacts might go away if we use a better gradient based optimiser (currently using fixed step size with momentum, however, l-bfgs might be feasible).
                                             </p>
                                             <p>
                                                 Now let's try something more abstract, perhaps some Mondrian.
@@ -218,6 +220,7 @@
                                             <p>
                                                 It has picked up on the block colours and thick vertical and horizontal lines.
                                                 It hasn't picked up on everything being rectangles, but after only seeing one image that would be quite a large leap of faith.
+                                                Perhaps this highlights that style and content are not always separable, especially in more modern works.
                                             </p>
                                             <p>
                                                 How about an older style, for example, Rembrant.
@@ -308,14 +311,14 @@
 		                                            <span class="image image-full"><img src="images/neural-art/output/canada_as_rothko.jpg" alt=""></span>
 		                                        </section>
 		                                        <section class="4u">
-		                                            <span class="image image-full"><img src="images/neural-art/output/kk_butt_as_rothko.jpg" alt=""></span>
+		                                            <span class="image image-full"><img src="images/neural-art/output/road_as_rothko.jpg" alt=""></span>
 		                                        </section>
 		                                        <section class="4u">
 		                                            <span class="image image-full"><img src="images/neural-art/output/archer_as_rothko.jpg" alt=""></span>
 		                                        </section>
                                             </div>
                                             <p>
-                                                ...and this Pollock.
+                                                ...and this Pollock...
                                             </p>
                                             <div class="row">
 		                                        <section class="4u">
@@ -455,10 +458,19 @@
 		                                        </section>
                                             </div>
 											<header>
+												<h3>How do I make my own images?</h3>
+											</header>
+											<p>
+												At the time of writing this is hot of the press, so there are only a few implementations in the form of code.
+												I was halfway through writing my own stuff before <a href="https://github.com/kaishengtai/neuralart">this</a> was released which I used to generate the images in this article.
+												There is a new implementation <a href="http://gitxiv.com/posts/jG46ukGod8R7Rdtud/a-neural-algorithm-of-artistic-style">here</a> but I'm not convinced it's much better; machine image of this implementation available <a href="https://www.terminal.com/snapshot/054f5a4d8d576779ee4b8cd77718e250027955205e7db80dc2cd3f1b7add13cd">here</a>.
+												I'm waiting for an implementation with a better optimiser and invariance to image sizes; or maybe I'll finish my own implementation.
+											</p>
+											<header>
 												<h3>How does it work?</h3>
 											</header>
 											<p>
-												Hopefully I'll write a description of how this works soon. For the time being, code is <a href="https://github.com/kaishengtai/neuralart">here</a> and a new implementation has appeared <a href="http://gitxiv.com/posts/jG46ukGod8R7Rdtud/a-neural-algorithm-of-artistic-style">here</a>.
+											    ...
 											</p>
 											<header>
 												<h3>Is art dead?</h3>
@@ -470,7 +482,20 @@
 												<h3>Where next?</h3>
 											</header>
 											<p>
-												I'll write this soon...
+												There are a couple of problems with the current implementations. I would have fixed them myself but my skill level with torch and lua at the moment is baby seal.
+												If I get the time I'll finish my caffe implementation.
+											</p>
+											<p>
+												First, most implementations are using very simplistic optimisers (e.g. fixed-step-size first-order methods).
+												While this is pratically necessary for training neural networks, it should be feasible to use a more powerful optimiser on these problems.
+											</p>
+											<p>
+												Second, the algorithm is not invariant to changes in the size of the input images.
+												It should be easy enough to get a handle on the expected size of the style and content obejctives (across multiple layers) and make a suitable scaling based on this.
+											</p>
+											<p>
+												But on a more positive note, the code is good enough to play with this technique.
+												I'm looking forward to new definitions of style, applications to video, fusing styles and whatever else the future brings.
 											</p>
                                             </br>
 										</article>
