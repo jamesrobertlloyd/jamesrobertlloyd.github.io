@@ -465,6 +465,7 @@
 												I was halfway through writing my own stuff before <a href="https://github.com/kaishengtai/neuralart">this</a> was released which I used to generate the images in this article.
 												There is a new implementation <a href="http://gitxiv.com/posts/jG46ukGod8R7Rdtud/a-neural-algorithm-of-artistic-style">here</a> but I'm not convinced it's much better; machine image of this implementation available <a href="https://www.terminal.com/snapshot/054f5a4d8d576779ee4b8cd77718e250027955205e7db80dc2cd3f1b7add13cd">here</a>.
 												I'm waiting for an implementation with a better optimiser and invariance to image sizes; or maybe I'll finish my own implementation.
+												UPDATE: The second code link now has a better optimiser. This is probably the code to be using.
 											</p>
 											<header>
 												<h3>How does it work?</h3>
@@ -512,6 +513,7 @@
 											<p>
 												First, most implementations are using very simplistic optimisers (e.g. fixed-step-size first-order methods).
 												While this is pratically necessary for training neural networks, it should be feasible to use a more powerful optimiser on these problems.
+												UPDATE: <a href="https://github.com/jcjohnson/neural-style">This code</a> has just switched to l-bfgs.
 											</p>
 											<p>
 												Second, the algorithm is not invariant to changes in the size of the input images.
