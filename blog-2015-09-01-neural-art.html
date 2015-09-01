@@ -470,7 +470,31 @@
 												<h3>How does it work?</h3>
 											</header>
 											<p>
-											    ...
+											    If you understand neural networks, the <a href="http://arxiv.org/pdf/1508.06576.pdf">paper</a> is highly readable. Just be careful that some of the equations are currently inconsistent; there are some implicit ReLUs and/or overloading of symbols.
+											</p>
+											<p>
+											    If you are not so familiar with neural networks, do not fear, the technique is simple at a conceptual level.
+											    Neural networks for image processing tasks can be thought of as several layers of image filters.
+											    By filter, I mean things that identify the location of features like edges, straight lines or blobs rather than the instagram usage of the word.
+											    Several filters are applied sequentially to create more complex filters, such as those that identify the location of several parallel lines, or circles in a grid shape.
+											    As more and more filters are applied, more abstract objects can be identified, such as things that could be parts of noses, or pagodas.
+											    Check out this <a href="blog-2015-08-04-going-places.html">video</a> to get a sense of the increasing abstraction of these filters as one passes through a neural network.
+											</p>
+											<p>
+											    The outputs of these filters are what the creators of this algorithm define as content.
+											    This makes a lot of sense, they record the location of certain types of object or pattern.
+											    The algorithm tries to find an image that has similar content to some image as defined by these features, and similar style to another image.
+											</p>
+											<p>
+											    So how is style defined?
+											    The answer is deceptively simple, they look at the correlations of these filters across the entire image.
+											    This measures things like whether or not lines are commonly found next to blobs and more abstract concepts.
+											    This is certainly not the only way to define style, but the guys behind the paper have written about visual style <a href="http://arxiv.org/abs/1505.07376">before</a> so I'll take their word that this correlation measure captures certain aspects of style.
+											</p>
+											    Without pictures this is probably still a little confusing (I hope to get round to making pictures).
+											    The important things to remember are content = what things are where and style = what things appear in the same location.
+											    The generated image is a compromise between matching style and content.
+											<p>
 											</p>
 											<header>
 												<h3>Is art dead?</h3>
