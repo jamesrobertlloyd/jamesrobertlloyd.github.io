@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" 
+        src="http://maps.google.com/maps/api/js"></script>
+</head> 
+<body>
+
+<p>How long to New Year, exactly?</p>
+
+<button onclick="getLocation()">Do the thing</button>
+
+<p id="latLong"></p>
+
+<div id="map" style="width: 400px; height: 300px"></div> 
+
+<p id="seconds"></p>
+
+<iframe id="countdown" src="" allowTransparency="true" frameborder="0" width="182" height="50"></iframe>
+
+<script>
+var x = document.getElementById("latLong");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+
+function showPosition(position) {
+    var longitude = position.coords.longitude;
+
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + longitude;	
+    var myOptions = {
+       zoom: 13,
+       center: new google.maps.LatLng(position.coords.latitude, longitude),
+       mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    var timeRelativeToUTC = - 12 * 60 * 60 * (longitude) / 180;
+    if (timeRelativeToUTC < 0) {
+    	var year = 2016;
+    	var month = 12;
+    	var day = 31;
+    } else {
+    	var year = 2017;
+    	var month = 1;
+    	var day = 1;
+    };
+    var hours = Math.trunc(timeRelativeToUTC / (60 * 60));
+    timeRelativeToUTC = timeRelativeToUTC - hours * 60 * 60;
+    var minutes = Math.trunc(timeRelativeToUTC / (60));
+    timeRelativeToUTC = timeRelativeToUTC - minutes * 60;
+    // var seconds = Math.trunc(timeRelativeToUTC);
+    var seconds = Math.round(timeRelativeToUTC);
+    timeRelativeToUTC = timeRelativeToUTC - seconds;
+    // var milliseconds = Math.trunc(timeRelativeToUTC * 1000);
+
+    if (hours < 0) {
+    	hours = 23 + hours;
+    };
+    if (minutes < 0) {
+    	minutes = 59 + minutes;
+    };
+    if (seconds < 0) {
+    	seconds = 59 + seconds;
+    };
+    // if (milliseconds < 0) {
+    // 	milliseconds = 999 + milliseconds;
+    // };
+
+    var datestamp = "" + year + "-" + pad(month, 2) + "-" + pad(day, 2) + "T" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2);
+
+    document.getElementById('seconds').innerHTML = "More exact New Year: UTC " + datestamp;
+
+    document.getElementById('countdown').src = "http://free.timeanddate.com/countdown/i50cwvgp/cf12/cm0/cu5/ct0/cs0/ca0/co1/cr0/ss0/cac000/cpc000/pct/tcfff/fs100/szw320/szh135/tatTime%20until%20new%20year/tac000/tptTime%20since%20new%20year/tpc000/iso" + datestamp;
+}  
+</script>
+
+</body>
+</html>
