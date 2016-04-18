@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<!--
+	Strongly Typed 1.1 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>James Robert Lloyd</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="viewport" content="width=1040" />
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-53200682-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+	</head>
+	<body class="no-sidebar">
+
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+						
+				<!-- Header -->
+					<div id="header" class="container">
+						
+						<!-- Logo -->
+							<h1 id="logo"><a href="#">James Robert Lloyd</a></h1>
+							<p>Statistical machine learning researcher</p>
+						
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li><a class="fa fa-home" href="index.html"><span>Home</span></a></li>
+									<li><a class="fa fa-flask" href="research.html"><span>Research</span></a></li>
+									<li><a class="fa fa-file-text-o" href="talks.html"><span>Talks</span></a></li>
+									<li><a href="https://github.com/jamesrobertlloyd/" class="fa fa-github"><span>Git</span></a></li>
+									<li><a class="fa fa-envelope" href="contact.html"><span>Contact</span></a></li>
+								</ul>
+							</nav>
+
+					</div>
+
+			</div>
+			
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+
+				<!-- Main -->
+					<div id="main" class="container">
+
+											<div id="main" class="container">
+						<div class="row">
+						
+							<!-- Content -->
+								<div id="content" class="12u skel-cell-important">
+
+
+									<!-- Post -->
+										<article class="is-post">
+											<header>
+												<h2>Poetry and computational creativity</h2>
+											</header>
+                                            <br>
+											<blockquote>
+												The world is dead and so, so,<br>
+												The friends are long ago<br>
+												And the stars are blown away.<br>
+												<br>
+												PoetryNet, 2015
+											</blockquote>
+											<h3>Introduction</h3>
+											<p>
+												A little while after Andrej Karpathy released [char-rnn](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) into the world, [Alex Davies](http://www.alexdavies.net/) and I explored the possibility of using it to create computer generated poetry (Alex had already scraped 10,000 poems, just in case they were ever useful). We took the char-rnn code, a fair chunk of Wikipedia and the 10,000 poems and created PoetryNet. The results were "unreasonably effective" and really quite amusing. And in an unusual turn of events, we adapted the system to provide lyrics for a [musical staged in London's west end](http://beyondthefencemusical.com/).
+												<br><br>
+												In this article we offer the brief thoughts of two computer scientists on creativity and probe the poetic powers of a char-rnn. But mostly this is an excuse to copy paste amusing passages of computer generated ramblings.
+											</p>
+											<h3>How can a computer learn to write poetry?</h3>
+											<p>
+												Consider the following sentence fragment
+											</p>
+											<blockquote>
+												The cat sat on the...
+											</blockquote>
+											<p>
+												What comes next? How about this sentence (and word) fragment
+											</p>
+											<blockquote>
+												The cat sat on the m...
+											</blockquote>
+											<p>
+												or
+											</p>
+											<blockquote>
+												The cat sat on the ma...
+											</blockquote>
+											<p>
+												There are many possible ways to extend these fragments, but some are more likely than others. A computer can learn which extensions are more likely than others by seeing lots of examples. It can learn the common patterns of language and poetry.
+												<br><br>
+												Computers have been able to learn patterns from data for a very long time (any statistical analysis is a form of pattern learning), but recently the machine learning community has had a lot of success with neural networks. One of the factors for their success is their computational efficiency, which allows them to process vast quantities of data and potentially discover very complicated patterns. They may [not be very efficient](http://www.theguardian.com/media-network/2016/jan/28/google-ai-go-grandmaster-real-winner-deepmind) with respect to the amount of data they need to ingest to learn anything, but when data is plentiful this is not much of a problem. Fortunately for us, there are many poems in the world to learn from.
+											</p>
+                                            <h3>Learning in action - from gibberish to semi-grammatical nonsense</h3>
+<p>
+After collecting 10,000 poems, we used [char-rnn](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) to read in poems character by character and then try to predict what comes next. By getting the computer to make several predictions, one after the other, we can produce an entire poem, character by character. This is quite different to how a human learns to write poetry, but we'll discuss that later.
+<br><br>
+Let's see the learning process in action.
+</p>
+<h4>After a few seconds - character frequency and not much else</h4>
+                                            <br>
+<blockquote>
+/Wteh lea  e       a   sti es s e   inne re     l se    l lhre ,so   e e sir  a f
+  e riay    r mn rdh       rewsr e iie r eto  e     ctsse    e i      o en e   tnea e s  ryc   e   ot hii ntr o e   dert aedste el  h en i dhe e o,   eol  a ilr    ea w a   o a    w r asi o oe t d  t e ean r r  h  h s
+<br>
+i t   e  os  hi i     e hee i eth e eu      e i
+<br>
+k
+</blockquote>
+<h4>After about a minute - word shape things</h4>
+<br>
+                                            <blockquote>
+ursoe haoth sicge tim bonr<br>
+ghoiconiiroch is a)o<br>
+PuTTY dhr doooc nins voaed ofitot tions anewt<br>
+<br>
+Ioun ao<br>
+          oe                                                       wha<br>                                                                                                                                                                                                                                                    n ap thri
+shes anorhithurioidheet ofemh
+                                                </blockquote>
+<h4>After about 5 minutes - pronounceable gibberish and some small words</h4>
+<br>
+                                            <blockquote>
+Er as the rears at the sear nreep gor I her the spreatsed<br>
+The tore in the he dorr wall<br>
+and stilling surs there and ware<br>
+The its sale and sam and the lay le dear boom sast me the ce coom strwarbe as so une in ussing some has the seem non coild be and serool sill momess.<br>
+<br>
+Stand the fanes and chen the posser.<br>
+Srone the she was insoneed the crour faning of mas,
+                                                </blockquote>
+<h4>After about 10 minutes - very bad spelling, but starting to look like language (and it leets!)</h4>
+<br>
+                                            <blockquote>
+5witch you lears who heart,<br>
+In the creature and too said to seet marged to Nature.<br>
+<br>
+It is no look of the farrarge where the mills<br>
+The wassed mast in the prisering into the way of the ground,<br>
+I am all I seering how swall to the smoke of a had in the pure<br>
+All where the souls sing lakes the roage I great all desperble For you take my singer in the unimage<br>
+The sead are while the strong will smoully<br>
+they heard not light in his amstrable he would gourdeats and ond wheeter down to seeper<br>
+                                                </blockquote>
+<h4>After about half an hour - new favourite word</h4>
+<br>
+                                            <blockquote>
+It called one room,<br>
+hands in the world and earth.<br>
+       In the break trees.<br>
+<br>
+       THRAR<br>
+<br>
+SOme will dissun and make it is forth<br>
+And the hands of was my ever one sings whose sin.<br>
+The beef all of the meanal camps<br>
+                                          the moon of my fire--<br>
+               where your lays the wind,<br>
+                                                                        sanding blind mind speet<br>
+and sing of indeen in the world
+                                                </blockquote>
+<h4>A few hours later</h4>
+<br>
+                                            <blockquote>
+    Are you not pleasant?<br>
+    And as I am leaving you my life like the earthworms?<br>
+    Who cannot remember to be a room of mine<br>
+    I love behind three states, or differently, and nothing<br>
+    but a lovely enviet of one arrival, a cutting switchback<br>
+    and wide writing in the knoll, and in my brother's warmth,<br>
+    like the white black chin that prizes and forms within the sky,<br>
+    and the peach with the ancient broad washed-up beard of the sky<br>
+    with sudden groans of mouths of cattle and so tighter red<br>
+    in the water which has been curling in its cages and comes<br>
+    when she sucks me back to the face of this door<br>
+    and she presses her gaze and her left hand just as he falls<br>
+    a little house from heaven and takes the sleep of the morning<br>
+    and the forest is afraid of the sun is the sun of the land<br>
+    and by the kitchen wall and the sun of the land.<br>
+<br>
+    They are<br>
+    bombing in<br>
+    the Earth.<br>
+<br>
+    The world can fall and get back to be erosion, or welcome the moment<br>
+    That they are hung up and the pigs live with it.
+                                                </blockquote>
+
+
+
+											<br>
+										</article>
+										<div id="disqus_thread"></div>
+                                        <script>
+                                            /**
+                                            * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                                            * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                                            */
+                                            var disqus_config = function () {
+                                                this.page.url = "http://jamesrobertlloyd.com/blog-2016-04-18-poetry-net.html"; // Replace PAGE_URL with your page's canonical URL variable
+                                                this.page.identifier = "blog-2016-04-18-poetry-net"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                            };
+                                            
+                                            (function() { // DON'T EDIT BELOW THIS LINE
+                                                var d = document, s = d.createElement('script');
+
+                                                s.src = '//jamesrobertlloyd.disqus.com/embed.js';
+
+                                                s.setAttribute('data-timestamp', +new Date());
+                                                (d.head || d.body).appendChild(s);
+                                            })();
+                                        </script>
+                                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+								</div>
+
+						</div>
+
+					</div>
+
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+
+				<!-- Footer -->
+					<div id="footer" class="container">
+						<header>
+							<h2>Questions or comments? <a href='contact.html'><strong>Get in touch:</strong></a></h2>
+						</header>
+						<div class="row">
+							<div class="12u">
+								<section>
+									<div class="row">
+										<div class="12u", align='center'>
+											<a href="contact.html" class="button button-icon fa fa-envelope">Contact</a>
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+
+				<!-- Copyright -->
+					<div id="copyright" class="container">
+						<ul class="links">
+							<li>Copyright &copy; James Robert Lloyd 2014</li>
+							<li>HTML5 template: <a href="http://html5up.net/">HTML5 UP</a></li>
+						</ul>
+					</div>
+
+			</div>
+
+	</body>
+</html>
