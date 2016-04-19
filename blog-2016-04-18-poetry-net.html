@@ -88,9 +88,28 @@
 											</blockquote>
 											<h3>Introduction</h3>
 											<p>
-												A little while after Andrej Karpathy released [char-rnn](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) into the world, [Alex Davies](http://www.alexdavies.net/) and I explored the possibility of using it to create computer generated poetry (Alex had already scraped 10,000 poems, just in case they were ever useful). We took the char-rnn code, a fair chunk of Wikipedia and the 10,000 poems and created PoetryNet. The results were "unreasonably effective" and really quite amusing. And in an unusual turn of events, we adapted the system to provide lyrics for a [musical staged in London's west end](http://beyondthefencemusical.com/).
+												A little while after Andrej Karpathy released
+                                                <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">
+                                                    char-rnn
+                                                </a> into the world,
+                                                <a href="http://www.alexdavies.net/">
+                                                    Alex Davies
+                                                </a> and I explored the possibility of using it to create computer
+                                                generated poetry (Alex had already scraped 10,000 poems,
+                                                just in case they were ever useful). We took the char-rnn code,
+                                                a fair chunk of Wikipedia and the 10,000 poems and created PoetryNet
+                                                (or Clarissa is it later became known).
+                                                The results were "unreasonably effective" and really quite amusing.
+                                                And in an unusual turn of events, we adapted the system to provide
+                                                lyrics for a
+                                                <a href="http://beyondthefencemusical.com/">
+                                                    musical staged in London's west end.
+                                                </a>
 												<br><br>
-												In this article we offer the brief thoughts of two computer scientists on creativity and probe the poetic powers of a char-rnn. But mostly this is an excuse to copy paste amusing passages of computer generated ramblings.
+												In this article we offer the brief thoughts of two computer scientists
+                                                on creativity and probe the poetic powers of a char-rnn.
+                                                But mostly this is an excuse to copy paste amusing passages of
+                                                computer generated ramblings.
 											</p>
 											<h3>How can a computer learn to write poetry?</h3>
 											<p>
@@ -114,11 +133,21 @@
 											<p>
 												There are many possible ways to extend these fragments, but some are more likely than others. A computer can learn which extensions are more likely than others by seeing lots of examples. It can learn the common patterns of language and poetry.
 												<br><br>
-												Computers have been able to learn patterns from data for a very long time (any statistical analysis is a form of pattern learning), but recently the machine learning community has had a lot of success with neural networks. One of the factors for their success is their computational efficiency, which allows them to process vast quantities of data and potentially discover very complicated patterns. They may [not be very efficient](http://www.theguardian.com/media-network/2016/jan/28/google-ai-go-grandmaster-real-winner-deepmind) with respect to the amount of data they need to ingest to learn anything, but when data is plentiful this is not much of a problem. Fortunately for us, there are many poems in the world to learn from.
+												Computers have been able to learn patterns from data for a very long
+                                                time (almost any statistical analysis is a form of pattern learning), but
+                                                recently the machine learning community has had a lot of success with
+                                                neural networks. One of the factors for their success is their
+                                                computational efficiency, which allows them to process vast quantities
+                                                of data and potentially discover very complicated patterns. They may
+                                                <a href="http://www.theguardian.com/media-network/2016/jan/28/google-ai-go-grandmaster-real-winner-deepmind">
+                                                    not be very efficient
+                                                </a> with respect to the amount of data they need to ingest to learn
+                                                anything, but when data is plentiful this is not much of a problem.
+                                                Fortunately for us, there are many poems in the world to learn from.
 											</p>
                                             <h3>Learning in action - from gibberish to semi-grammatical nonsense</h3>
 <p>
-After collecting 10,000 poems, we used [char-rnn](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) to read in poems character by character and then try to predict what comes next. By getting the computer to make several predictions, one after the other, we can produce an entire poem, character by character. This is quite different to how a human learns to write poetry, but we'll discuss that later.
+After collecting 10,000 poems, we used char-rnn to read in poems character by character and then try to predict what comes next. By getting the computer to make several predictions, one after the other, we can produce an entire poem, character by character. This is quite different to how a human learns to write poetry, but we'll discuss that later.
 <br><br>
 Let's see the learning process in action.
 </p>
@@ -210,9 +239,210 @@ and sing of indeen in the world
     The world can fall and get back to be erosion, or welcome the moment<br>
     That they are hung up and the pigs live with it.
                                                 </blockquote>
+                                            <h3>What has char-rnn learnt about language and poetry?</h3>
+<p>
+The excerpt above may not be great poetry, but there has been an impressive amount of learning from its beginnings of a random jumble of unrelated characters. Let's try to get some understanding of what the char-rnn knows of language and poetry.
+</p>
+                                            <h4>Completing words</h4>
+                                            <br>
+<p>
+We can get a sense of words that the char-rnn has learned by getting it to complete half formed words and phrases. For example, if we get the char-rnn to read in the characters "ap", it often completes it as "apple", and "tru" can become "truck" or "trust" amongst other possibilities.
+<br><br>
+We can verify that it recognises the difference between lower and upper case words, for example
+</p>
+                                            <blockquote>
+Pe &#8594 Persian
+                                                </blockquote>
+<p>
+and
+<p>
+                                            <blockquote>
+Pet &#8594 Peter
+</blockquote>
+                                            <p>
+There are some words that the system has not learned, but it will make a decent guess of something that looks like a word
+</p>
+                                            <blockquote>
+Recog &#8594 Recography
+                                                </blockquote>
+<p>
+"Recography" may not be a word, but it certainly could be!
+    </p>
+<h4>Completing phrases</h4>
+                                            <br>
+<p>
+One might imagine that perhaps char-rnn has just rememebered long stretches of poetry and has just learned to recite them whilst occassionally switching poem so that no-one recognises the plagiarism. For technical readers, we made sure that we did not overfit our model, for less technical folks, here are some examples of the char-rnn failing to recreate some Shakespeare
+</p>
+                                            <blockquote>
+Shall I compare thee to skill,<br>
+The white heart of the release moon still come and say,<br>
+And all the one rain is the our heads, in the green day.<br>
+The precision of countrys of the corner so little garden,<br>
+darkening blessed of sea while one of the city for the voice in the window--<br>
+The rusty ban, who deadest an old and the starpy called people,<br>
+And the draw of the doors and the time for proval, so many instant<br>
+Than are a river on the warm of the blood of his willing and play<br>
+And gave me here some move; and what any
+                                                </blockquote>
+<p>
+or
+    </p>
+<blockquote>
+Shall I compare thee to my takeaway,<br>
+    O son of the bark, the boy not mother!<br>
+        Says the boy he's coming from his luck.
+    </blockquote>
+                                            <h3>The creativity factor</h3>
+<p>
+Above we mentioned that the char-rnn might complete "tru" either as "truck" or "trust". This is because instead of predicting which character comes next, the char-rnn is predicting the *probability* of what character comes next. Consequently, we can change how "creative" (more about that later) the system is, by altering its tendency to pick the most likely character or try something less likely. Below are the results of changing the "creativity factor".
+</p>
+                                            <h4>Very low</h4>
+                                            <br>
+<blockquote>
+And the soul with the sea where the wind will be<br>
+And the black sky is still and the sun is all there<br>
+And the sun is dry and something that is still and the sun<br>
+That is the sun and the sun and the wind and the street  <br>
+And the wind and the sun and the light of the world  <br>
+And the wind stands the wind and the sun and the sun  <br>
+And the sun and the street and the sun and the sun
+    </blockquote>
+<h4>Low</h4>
+                                            <br>
+<blockquote>
+Often the morning is but a light  <br>
+And the flame of the sun is shaken,  <br>
+And the air is the slow sound of the sea,<br>
+And the blood of the mountain shore  <br>
+And the blood of the sunset streams  <br>
+Of the roof of the sun and the hall
+</blockquote>
+                                            <h4>Normal</h4>
+                                            <br>
+<blockquote>
+Of this I think of the conquerors:  <br>
+The crowd, the natural camera,  <br>
+And stands a seed of ripeness and burns. <br>
+<br><br>
+I always say the book starts to see it  <br>
+To say a certain slim neck below.  <br>
+<br><br>
+A child belongs to a friend  <br>
+By the time the rest of us have been called  <br>
+And made the wrong thing is all  <br>
+<br><br>
+He says we are so close to the heart  <br>
+Of concern and a story and the product  <br>
+Of our sweetness is the god of the time.  <br>
+<br><br>
+In a strange world a dull beauty  <br>
+Is a faithful one in the source  <br>
+Of this time that such a stranger  <br>
+<br><br>
+They were forgotten and they were there.
+</blockquote>
+<h4>High</h4>
+                                            <br>
+<blockquote>
+As the car starts to see some other twist of sound,  <br>
+I think he is, on the paper to our sharp surface,  <br>
+And for perceiving whether a spirit  <br>
+To the dark boking life will learn to help  <br>
+Nothing but for him. All that desk receives  <br>
+And then is so young and fair, and that it is.
+    </blockquote>
+                                            <h4>Very high</h4>
+                                            <br>
+                                            <blockquote>
+Before the country  <br>
+light begins with snowflowers,  <br>
+I suppose he'll be seen  <br>
+by Similia you let them  <br>
+respond, the grottes of perfect <br>
+big silk feet. Toy mass,  <br>
+sprayed at a stone  <br>
+riding thirty years ago
+                                                </blockquote>
+<h4>Super high</h4>
+                                            <br>
+<blockquote>
+I could cease to put what you knows where I don't know my notebook,<br>
+and I'm not sharp and you are wearing the German parts for the reader, and you sometimes heir<br>
+in silence and stars. After you released it to your eggplant with the wings.
+    </blockquote>
+<h4>Super higher</h4>
+                                            <br>
+<blockquote>
+no small acute orifice on<br>
+her sundown tranquillizer<br>
+is just my viger: He smalls<br>
+a brush within me?<br>
+Dogs jow -- this one;<br>
+though Warning-tirer cat waits.
+    </blockquote>
+                                            <h3>A creativity scorecard</h3>
+<p>
+Now is probably a good time at which to point out the elephant in the room. PoetryNet forgets what it is talking about after a few words and each line only occasionally connects with the lines around it. This gives the poems an abstract and wandering style, but this is unlikely to be a stylistic choice, rather an inability to stay on topic. It may not be great poetry in a classical sense, but is it creative? And for that matter, what is creativity?
+</p>
+                                                <blockquote>
+“Creativity” is one of those grab-bag terms, like “happiness” and “love,” that can mean so many things it runs the risk of meaning nothing at all
+<br><br>
+Maria Popova
+                                                    </blockquote>
+<p>
+To many, creativity falls squarely into a sacred set of fundamentally human qualities that could never be replicated by a machine, but others define it in a much more machine-accessible way. A good collection of opinions can be found
+    <a href="https://www.brainpickings.org/2013/09/06/what-is-creativity/">
+        here
+    </a>, but let's see how a char-rnn stands up to a representative set of definitions we have collected from around the Internet.
+</p>
+                                                <ol>
+   <li>1. Finding something new and interesting - <em>Yes</em></li>
+   <li>2. Communicate something unique about the human condition - <em>No</em></li>
+   <li>3. Franken, Human motivation - Creativity is defined as the tendency to generate or recognize ideas, alternatives, or possibilities that may be useful in solving problems, communicating with others, and entertaining ourselves and others - <em>Maybe</em></li>
+   <li>4. Dictionary.com - the ability to transcend traditional ideas, rules, patterns, relationships, or the like, and to create meaningful new ideas, forms, methods, interpretations, etc.; originality, progressiveness, or imagination - <em>Probably not</em></li>
+   <li>5. Wikipedia - “Creativity is a phenomenon whereby something new and somehow valuable is formed” - <em>Yes</em></li>
+   <li>6. Urban dictionary - “When you forget who you stole it from.” - <em>Yes</em></li>
+   <li>7. Steve Jobs - “Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn’t really do it, they just saw something. It seemed obvious to them after a while. That’s because they were able to connect experiences they’ve had and synthesize new things. And the reason they were able to do that was that they’ve had more experiences or they have thought more about their experiences than other people. Unfortunately, that’s too rare a commodity. A lot of people in our industry haven’t had very diverse experiences. So they don’t have enough dots to connect, and they end up with very linear solutions without a broad perspective on the problem. The broader one’s understanding of the human experience, the better design we will have.” - <em>No</em></li>
+</ol>
+<p>
+This doesn't seem too bad - there are some definitions that a char-rnn definitely fulfills, but those about understanding the human condition are out of its grasp and this is likely to be the case for some time.
+</p>
 
-
-
+                                            <h3>How is this different from a human writing poetry?</h3>
+<p>
+There are many differences, but two that stand out to us are
+</p>
+                                                <ul>
+                                                    <li>&#8226 Humans are writing to express feelings to other humans</li>
+<li>&#8226 Simple machine learning systems are trying to mimic what they have seen humans writing</li>
+                                                    </ul>
+                                                <p>
+                                                    and
+                                                </p>
+                                                <ul>
+                                                    <li>&#8226 Humans are connecting the words with the concepts they represent</li>
+                                                    <li>&#8226 Simple machine learning systems cannot currently do this. They may learn that a cat and dog are related, but have no concept of what these really are since they have not experienced the world.</li>
+                                                </ul>
+                                            <p>
+Both of these differences stem from the fact that machines still have a very limited experience of the world. Some machines have seen millions of images, read thousands of novels or watched countless hours of video, but none have watched a sunset with an old friend, or been stood up on a date or eaten too many twinkies. Their life experiences have been incredibly limited and thus we shouldn't expect them to understand the world, much less what it is like to be human.
+<br><br>
+For this reason, purely generative systems, such as this one, are entertaining curiosities for computer scientists but
+                                                unlikely to be valuable in the near future. Future work that seems more
+                                                immediately valuable is likely to focus on computer systems that allow
+                                                for
+                                                <a href="http://www.flow-machines.com/leadsheetgeneration/">
+                                                    interaction between human and machine
+                                                </a>.
+</p>
+                                            <h3>A final favourite short poem</h3>
+<blockquote>
+    The Mountains
+    <br><br>
+    So far away the self is fast asleep<br>
+    Continuously disturbed by the world.
+    <br><br>
+    PoetryNet 2015
+</blockquote>
 											<br>
 										</article>
 										<div id="disqus_thread"></div>
