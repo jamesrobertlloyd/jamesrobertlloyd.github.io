@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/codechat/static/css/main.9bc1f158.css",
+    "main.js": "/codechat/static/js/main.0be8aa51.js",
+    "static/js/787.d1d4a2c2.chunk.js": "/codechat/static/js/787.d1d4a2c2.chunk.js",
+    "index.html": "/codechat/index.html",
+    "main.9bc1f158.css.map": "/codechat/static/css/main.9bc1f158.css.map",
+    "main.0be8aa51.js.map": "/codechat/static/js/main.0be8aa51.js.map",
+    "787.d1d4a2c2.chunk.js.map": "/codechat/static/js/787.d1d4a2c2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9bc1f158.css",
+    "static/js/main.0be8aa51.js"
+  ]
+}
